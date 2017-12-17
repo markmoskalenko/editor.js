@@ -986,6 +986,46 @@ var CodexEditor =
 	
 	    }
 	
+	    position() {
+	
+	        let atStart = function () {
+	
+	            let selection       = window.getSelection(),
+	                anchorOffset    = selection.anchorOffset,
+	                anchorNode      = selection.anchorNode,
+	                firstLevelBlock = editor.content.getFirstLevelBlock(anchorNode),
+	                pluginsRender   = firstLevelBlock.childNodes[0];
+	
+	            if (!editor.core.isDomNode(anchorNode)) {
+	
+	                anchorNode = anchorNode.parentNode;
+	
+	            }
+	
+	            let isFirstNode  = anchorNode === pluginsRender.childNodes[0],
+	                isOffsetZero = anchorOffset === 0;
+	
+	            return isFirstNode && isOffsetZero;
+	
+	        };
+	
+	        let atTheEnd = function () {
+	
+	            let selection    = window.getSelection(),
+	                anchorOffset = selection.anchorOffset,
+	                anchorNode   = selection.anchorNode;
+	
+	            /** Caret is at the end of input */
+	            return !anchorNode || !anchorNode.length || anchorOffset === anchorNode.length;
+	
+	        };
+	
+	        return {
+	            atStart,
+	            atTheEnd
+	        }
+	    };
+	
 	    /**
 	     * Creates Document Range and sets caret to the element.
 	     *
@@ -1267,40 +1307,6 @@ var CodexEditor =
 	//     };
 	//
 	//
-	//     caret.position = {
-	//
-	//         atStart : function () {
-	//
-	//             var selection       = window.getSelection(),
-	//                 anchorOffset    = selection.anchorOffset,
-	//                 anchorNode      = selection.anchorNode,
-	//                 firstLevelBlock = editor.content.getFirstLevelBlock(anchorNode),
-	//                 pluginsRender   = firstLevelBlock.childNodes[0];
-	//
-	//             if (!editor.core.isDomNode(anchorNode)) {
-	//
-	//                 anchorNode = anchorNode.parentNode;
-	//
-	//             }
-	//
-	//             var isFirstNode  = anchorNode === pluginsRender.childNodes[0],
-	//                 isOffsetZero = anchorOffset === 0;
-	//
-	//             return isFirstNode && isOffsetZero;
-	//
-	//         },
-	//
-	//         atTheEnd : function () {
-	//
-	//             var selection    = window.getSelection(),
-	//                 anchorOffset = selection.anchorOffset,
-	//                 anchorNode   = selection.anchorNode;
-	//
-	//             /** Caret is at the end of input */
-	//             return !anchorNode || !anchorNode.length || anchorOffset === anchorNode.length;
-	//
-	//         }
-	//     };
 	//
 	//
 	
