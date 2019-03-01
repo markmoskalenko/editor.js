@@ -18,7 +18,7 @@
 	url = https://github.com/codex-editor/simple-image
 [submodule "src/components/tools/paragraph"]
 	path = src/components/tools/paragraph
-	url = https://github.com/codex-editor/paragraph
+	url = https://github.com/markmoskalenko/paragraph
 [submodule "example/tools/marker"]
 	path = example/tools/marker
 	url = https://github.com/codex-editor/marker
